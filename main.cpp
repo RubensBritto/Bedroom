@@ -15,7 +15,7 @@ static bool firstTimeMouse = true;
 //display list
 unsigned int esferaID[3];
 unsigned int cuboID[30];
-enum { BRICK, PAINTED, MASK, WOOD, MURO, LENCOL, QUADRO, TRAVESSEIRO};
+enum { BRICK, PAINTED, MASK, WOOD, MURO, LENCOL, QUADRO, TRAVESSEIRO, MADEIRA, TECIDO};
 Textura cuboTextura[3];
 
 camera cam(vec3(-100, 0, 0));
@@ -63,12 +63,14 @@ void init(GLFWwindow* window) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	Textura *tex1, *tex2, *tex3, *tex4, *tex5;
+	Textura *tex1, *tex2, *tex3, *tex4, *tex5, *tex6, *tex7;
 	cuboTextura[MURO].load("imagens/muro_branco.png");
 	cuboTextura[WOOD].load("imagens/wood.png");
 	cuboTextura[LENCOL].load("imagens/lencol.png");
 	cuboTextura[QUADRO].load("imagens/quadro.png");
 	cuboTextura[TRAVESSEIRO].load("imagens/travesseiro.png");
+	cuboTextura[MADEIRA].load("imagens/madeira.png");
+	cuboTextura[TECIDO].load("imagens/tecido.png");
 
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	//glEnable(GL_DEPTH_TEST);
@@ -97,6 +99,11 @@ void init(GLFWwindow* window) {
 	cuboID[22] = cuboID[0] + 22;
 	cuboID[23] = cuboID[0] + 23;
 	cuboID[24] = cuboID[0] + 24;
+	cuboID[25] = cuboID[0] + 25;
+	cuboID[26] = cuboID[0] + 26;
+	cuboID[27] = cuboID[0] + 27;
+	cuboID[28] = cuboID[0] + 28;
+	cuboID[29] = cuboID[0] + 29;
 
 	//largura, altura, expessura
 	tex1 = &cuboTextura[MURO];
@@ -126,8 +133,15 @@ void init(GLFWwindow* window) {
 	desenharCuboTextura(cuboID[21], 15.0, 10.0, 2.0, tex3); //colhao
 	tex4 = &cuboTextura[QUADRO];
 	desenharCuboTextura(cuboID[22], 7.0, 7.0, 1.0, tex4); //quadro
-	tex5 = &cuboTextura[TRAVESSEIRO];
-	desenharCuboTextura(cuboID[23], 2.0, 4.0, 0.5, tex5); //travesseiro
+	desenharCubo(cuboID[23], 0.5, 5.0, 0.5, preto); //pé da mesa superior direito
+	desenharCubo(cuboID[24], 0.5, 5.0, 0.5, preto); //pé da mesa superior esquerdo
+	desenharCubo(cuboID[25], 0.5, 5.0, 0.5, preto); //pé da mesa inferior esquerdo
+	desenharCubo(cuboID[26], 0.5, 5.0, 0.5, preto); //pé da mesa inferior direito
+	tex5 = &cuboTextura[MADEIRA];
+	desenharCuboTextura(cuboID[27], 15.0, 5.0, 0.357, tex5); //base da mesa
+	tex6 = &cuboTextura[TECIDO];
+	desenharCuboTextura(cuboID[28], 3.0, 3.0, 3.0, tex6); //puff
+
 }
 
 void desenha(float dt, GLFWwindow* window) {
@@ -300,12 +314,45 @@ void desenha(float dt, GLFWwindow* window) {
 	glCallList(cuboID[22]);
 	glPopMatrix();
 
-	//travesseiro
+	//pes da mesa - superior direito
 	glPushMatrix();
-	glTranslatef(79.0, -2.0, -40.0);
-	glRotated(90.0, 1.0, 0.0, 0.0);
+	glTranslatef(85.0, -10.0, -97.0);
 	glCallList(cuboID[23]);
 	glPopMatrix();
+
+	//pes da mesa - superior esquerdo
+	glPushMatrix();
+	glTranslatef(65.0, -10.0, -97.0);
+	glCallList(cuboID[24]);
+	glPopMatrix();
+
+	//pes da mesa - inferior esquerdo
+	glPushMatrix();
+	glTranslatef(65.0, -10.0, -89.0);
+	glCallList(cuboID[25]);
+	glPopMatrix();
+
+	//pes da mesa - inferior dirito
+	glPushMatrix();
+	glTranslatef(85.0, -10.0, -89.0);
+	glCallList(cuboID[26]);
+	glPopMatrix();
+
+
+	//base da mesa
+	glPushMatrix();
+	glTranslatef(75.0, -5.0, -93.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[27]);
+	glPopMatrix();
+
+	//puf
+	glPushMatrix();
+	glTranslatef(50.0, -9.0, -93.0);
+	//glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[28]);
+	glPopMatrix();
+
 
 
 }
