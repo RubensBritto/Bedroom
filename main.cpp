@@ -5,6 +5,7 @@
 #include "cores.h"
 #include "primitivas.h"
 #include "camera.h"
+//#include "Textura.h"
 
 
 static float angulo = 0.0;
@@ -14,6 +15,9 @@ static bool firstTimeMouse = true;
 //display list
 unsigned int esferaID[3];
 unsigned int cuboID[30];
+enum { BRICK, PAINTED, MASK, WOOD, MURO, LENCOL, QUADRO, TRAVESSEIRO};
+Textura cuboTextura[3];
+
 camera cam(vec3(-100, 0, 0));
 
 void teclado_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -57,40 +61,73 @@ void init(GLFWwindow* window) {
 	glfwMaximizeWindow(window);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	Textura *tex1, *tex2, *tex3, *tex4, *tex5;
+	cuboTextura[MURO].load("imagens/muro_branco.png");
+	cuboTextura[WOOD].load("imagens/wood.png");
+	cuboTextura[LENCOL].load("imagens/lencol.png");
+	cuboTextura[QUADRO].load("imagens/quadro.png");
+	cuboTextura[TRAVESSEIRO].load("imagens/travesseiro.png");
 
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glEnable(GL_DEPTH_TEST);
-cuboID[0] = glGenLists(30);
-cuboID[1] = cuboID[0] + 1;
-cuboID[2] = cuboID[0] + 2;
-cuboID[3] = cuboID[0] + 3;
-cuboID[4] = cuboID[0] + 4;
-cuboID[5] = cuboID[0] + 5;
-cuboID[6] = cuboID[0] + 6;
-cuboID[7] = cuboID[0] + 7;
-cuboID[8] = cuboID[0] + 8;
-cuboID[9] = cuboID[0] + 9;
-cuboID[10] = cuboID[0] + 10;
-cuboID[11] = cuboID[0] + 11;
-cuboID[12] = cuboID[0] + 12;
-cuboID[13] = cuboID[0] + 13;
-cuboID[14] = cuboID[0] + 14;
+	//glEnable(GL_DEPTH_TEST);
+	cuboID[0] = glGenLists(30);
+	cuboID[1] = cuboID[0] + 1;
+	cuboID[2] = cuboID[0] + 2;
+	cuboID[3] = cuboID[0] + 3;
+	cuboID[4] = cuboID[0] + 4;
+	cuboID[5] = cuboID[0] + 5;
+	cuboID[6] = cuboID[0] + 6;
+	cuboID[7] = cuboID[0] + 7;
+	cuboID[8] = cuboID[0] + 8;
+	cuboID[9] = cuboID[0] + 9;
+	cuboID[10] = cuboID[0] + 10;
+	cuboID[11] = cuboID[0] + 11;
+	cuboID[12] = cuboID[0] + 12;
+	cuboID[13] = cuboID[0] + 13;
+	cuboID[14] = cuboID[0] + 14;
+	cuboID[15] = cuboID[0] + 15;
+	cuboID[16] = cuboID[0] + 16;
+	cuboID[17] = cuboID[0] + 17;
+	cuboID[18] = cuboID[0] + 18;
+	cuboID[19] = cuboID[0] + 19;
+	cuboID[20] = cuboID[0] + 20;
+	cuboID[21] = cuboID[0] + 21;
+	cuboID[22] = cuboID[0] + 22;
+	cuboID[23] = cuboID[0] + 23;
+	cuboID[24] = cuboID[0] + 24;
 
-//largura, altura, expessura
-desenharCubo(cuboID[0], 30.0, 1.0, 30.0, amarelo); //piso
-desenharCubo(cuboID[1], 30.0, 13.0, 1.0, vermelho); // parede fundo
-desenharCubo(cuboID[2], 30.0, 13.0, 1.0, verde); //parede do lado direito
-desenharCubo(cuboID[3], 30.0, 13.0, 1.0, branco); //parede do lado esquerdo
-desenharCubo(cuboID[4], 30.0, 1.0, 30.0, branco_gelo); //topo
-desenharCubo(cuboID[5], 15.0, 13.0, 1.0, branco_gelo); //parede da frente 1
-desenharCubo(cuboID[6], 2.0, 4.0, 1.0, cinza); // janela 1
-desenharCubo(cuboID[7], 2.0, 4.0, 1.0, cinza_escuro); // janela 2
-desenharCubo(cuboID[8], 6.0, 10.0, 1.0, cinza_escuro); //portar
-desenharCubo(cuboID[9], 3.0, 13.0, 1.0, branco_gelo); //parede fundo 2
-desenharCubo(cuboID[10], 4.0, 4.5, 1.0, branco_gelo); //parede fundo 3
-desenharCubo(cuboID[11], 4.0, 4.5, 1.0, branco_gelo); //parede fundo 4
-desenharCubo(cuboID[12], 2.0, 10.0, 1.0, branco_gelo); //parede fundo 5
-desenharCubo(cuboID[13], 8.0, 3.0, 1.0, branco_gelo); //parede fundo 5
+	//largura, altura, expessura
+	tex1 = &cuboTextura[MURO];
+	desenharCubo(cuboID[0], 90.0, 50.0, 1.0, branco); //piso
+	desenharCuboTextura(cuboID[1], 90.0, 13.0, 1.0, tex1); // parede fundo
+	desenharCuboTextura(cuboID[2], 50.0, 13.0, 1.0, tex1); //parede do lado direito
+	desenharCuboTextura(cuboID[3], 50.0, 13.0, 1.0, tex1); //parede do lado esquerdo
+	desenharCuboTextura(cuboID[4], 30.0, 50.0, 0.5, tex1); //topo
+	desenharCuboTextura(cuboID[5], 50.0, 13.0, 1.0, tex1); //parede da frente 1
+	tex2 = &cuboTextura[WOOD];
+	desenharCuboTextura(cuboID[6], 4.0, 5.0, 1.0, tex2); // janela 1
+	desenharCuboTextura(cuboID[7], 4.0, 5.0, 1.0, tex2); // janela 2
+	desenharCuboTextura(cuboID[8], 6.0, 10.0, 1.0, tex2); //portar
+	desenharCuboTextura(cuboID[9], 12.0, 13.0, 1.0, tex1); //parede frente 2
+	desenharCuboTextura(cuboID[10], 15.0, 3.5, 1.0, tex1); //parede frente 3
+	desenharCuboTextura(cuboID[11], 15.0, 4.5, 1.0, tex1); //parede frente 4
+	desenharCuboTextura(cuboID[12], 7.0, 13.0, 1.0, tex1); //parede frente 5
+	desenharCuboTextura(cuboID[13], 6.0, 3.0, 1.0, tex1); //parede frente 6
+	desenharCuboTextura(cuboID[14], 8.0, 5.0, 1.0, tex1); //parede frente 7
+	desenharCubo(cuboID[15], 1.0, 2.0, 1.0, preto); //pé da cama superior direito
+	desenharCubo(cuboID[16], 1.0, 2.0, 1.0, preto); //pé da cama superior esquerdo
+	desenharCubo(cuboID[17], 10.0, 5.0, 1.0, amarelo); //cabeceira
+	desenharCubo(cuboID[18], 1.0, 2.0, 1.0, preto); //pé da cama inferior direito
+	desenharCubo(cuboID[19], 1.0, 2.0, 1.0, preto); //pé da cama inferior esquerdo
+	desenharCubo(cuboID[20], 15.0, 10.0, 1.0, preto); //base da cama
+	tex3 = &cuboTextura[LENCOL];
+	desenharCuboTextura(cuboID[21], 15.0, 10.0, 2.0, tex3); //colhao
+	tex4 = &cuboTextura[QUADRO];
+	desenharCuboTextura(cuboID[22], 7.0, 7.0, 1.0, tex4); //quadro
+	tex5 = &cuboTextura[TRAVESSEIRO];
+	desenharCuboTextura(cuboID[23], 2.0, 4.0, 0.5, tex5); //travesseiro
 }
 
 void desenha(float dt, GLFWwindow* window) {
@@ -104,63 +141,68 @@ void desenha(float dt, GLFWwindow* window) {
 
 	//piso
 	glPushMatrix();
-	glTranslatef(0.0, -11.0, -50.0);
+	glTranslatef(0.0, -13.0, -50.0);
+	glRotatef(90.0, 1.0, 0.0, 0.0);
+	//glScalef(3.0, 1.0, 3.0);
 	glCallList(cuboID[0]);
 	glPopMatrix();
 
 
 	//parede fundo
 	glPushMatrix();
-	glTranslatef(0.0, 1.0, -80.0);
+	glTranslatef(0.0, -1.0, -100.0);
+	//glScalef(2.0, 1.0, 1.0);
 	glCallList(cuboID[1]);
 	glPopMatrix();
 
 	//parede lado direito
 	glPushMatrix();
-	glTranslatef(30.0, 1.0, -50.0);
+	glTranslatef(90.0, -1.0, -50.0);
 	glRotatef(90.0, 0.0, 1.0, 0.0);
 	glCallList(cuboID[2]);
 	glPopMatrix();
 
 	//parede lado esquerdo
 	glPushMatrix();
-	glTranslatef(-30.0, 1.0, -50.0);
+	glTranslatef(-90.0, -1.0, -50.0);
 	glRotatef(90.0, 0.0, 1.0, 0.0);
 	glCallList(cuboID[3]);
 	glPopMatrix();
 
 	//topo
 	glPushMatrix();
-	glTranslatef(0.0, 15.0, -50.0);
+	glTranslatef(0.0, 13, -50.0);
+	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glScalef(3.0, 1.0, 3.0);
 	glCallList(cuboID[4]);
 	glPopMatrix();
 
 
 	//parede frente 1
 	glPushMatrix();
-	glTranslatef(15.0, 1.0, -20.0);
+	glTranslatef(40.0, -1.0, 1.0);
 	glCallList(cuboID[5]);
 	glPopMatrix();
 
 	//janela 1
 	glPushMatrix();
-	glTranslatef(-2.0, 1.0, -20.0);
+	glTranslatef(-30.0, 0.0, 1.0);
 	glCallList(cuboID[6]);
 	glPopMatrix();
 
 	//janela 2
 	glPushMatrix();
-	glTranslatef(-6.0, 1.0, -20.0);
+	glTranslatef(-36.0, 0.0, 1.0);
 	glCallList(cuboID[7]);
 	glPopMatrix();
 
 	//portar
 	glPushMatrix();
-	glTranslatef(-20.0, -2.0, -20.0);
+	glTranslatef(-70.0, -4.0, 1.0);
 	glCallList(cuboID[8]);
 	glPopMatrix();
 	
-	/* Abrir e fechar as portas
+	/* Abrir e fechar as portas e janelas
 	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS){
 		glPushMatrix();
 		glTranslatef(-20.0, -2.0, -25.0);
@@ -171,33 +213,100 @@ void desenha(float dt, GLFWwindow* window) {
 	
 	//parede frente 2
 	glPushMatrix();
-	glTranslatef(-11.0, 1.0, -20.0);
+	glTranslatef(-52.0, -1.0, 1.0);
 	glCallList(cuboID[9]);
 	glPopMatrix();
 	
 	//parede frente 3
 	glPushMatrix();
-	glTranslatef(-4.0, 9.5, -20.0);
+	glTranslatef(-25.0, 8.5, 1.0);
 	glCallList(cuboID[10]);
-	glPopMatrix();
-
-	//parede frente 3
-	glPushMatrix();
-	glTranslatef(-4.0, -7.5, -20.0);
-	glCallList(cuboID[11]);
 	glPopMatrix();
 
 	//parede frente 4
 	glPushMatrix();
-	glTranslatef(-28.0, -2.0, -20.0);
-	glCallList(cuboID[12]);
+	glTranslatef(-25.0, -9.5, 1.0);
+	glCallList(cuboID[11]);
 	glPopMatrix();
 
 	//parede frente 5
 	glPushMatrix();
-	glTranslatef(-22.0, 11, -20.0);
+	glTranslatef(-83.0, -1.0, 1.0);
+	glCallList(cuboID[12]);
+	glPopMatrix();
+
+	//parede frente 6
+	glPushMatrix();
+	glTranslatef(-70.0, 9.0, 1.0);
 	glCallList(cuboID[13]);
 	glPopMatrix();
+
+	//parede frente 7
+	glPushMatrix();
+	glTranslatef(-18.0, 0.0, 1.0);
+	glCallList(cuboID[14]);
+	glPopMatrix();
+
+	//pes da cama - superior direito
+	glPushMatrix();
+	glTranslatef(85.0, -10.0, -31.0);
+	glCallList(cuboID[15]);
+	glPopMatrix();
+	
+	//pes da cama - superior esquedo
+	glPushMatrix();
+	glTranslatef(85.0, -10.0, -49.0);
+	glCallList(cuboID[16]);
+	glPopMatrix();
+
+	//cabeceira
+	glPushMatrix();
+	glTranslatef(85.0, -3.0, -40.0);
+	glRotated(90.0, 0.0, 1.0, 0.0);
+	glCallList(cuboID[17]);
+	glPopMatrix();
+
+
+	//pes da cama - inferior direito
+	glPushMatrix();
+	glTranslatef(55.0, -10.0, -31.0);
+	glCallList(cuboID[18]);
+	glPopMatrix();
+
+	//pes da cama - inferior esquerdo
+	glPushMatrix();
+	glTranslatef(55.0, -10.0, -49.0);
+	glCallList(cuboID[19]);
+	glPopMatrix();
+
+	//base cama
+	glPushMatrix();
+	glTranslatef(69.0, -7.0, -40.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[20]);
+	glPopMatrix();
+
+	//colhão
+	glPushMatrix();
+	glTranslatef(69.0, -5.0, -40.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[21]);
+	glPopMatrix();
+
+	//quadro
+	glPushMatrix();
+	glTranslatef(0.0, 3.0, -99.0);
+	glRotated(90.0, 0.0, 0.0, 1.0);
+	glCallList(cuboID[22]);
+	glPopMatrix();
+
+	//travesseiro
+	glPushMatrix();
+	glTranslatef(79.0, -2.0, -40.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[23]);
+	glPopMatrix();
+
 
 }
 void redimensionar(int w, int h) {

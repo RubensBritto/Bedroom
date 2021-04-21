@@ -10,7 +10,7 @@ private:
 	vec3 m_left;
 	vec3 m_up;
 	vec3 m_velocidade;
-	float m_sc1 = 1; //escala
+	float m_sc1 = 1; //escala (velocidade que caminha no cenário)
 	float m_yaw;
 	float m_PI = 3.14159;
 public:

@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include "cg.h"
+#include "Textura.h"
 
 
 
@@ -13,6 +14,53 @@ void rect(vec3 p1, vec3 p2, vec3 p3, vec3 p4, color cor) {
 	glVertex3fv(&p3.x);
 	glVertex3fv(&p4.x);
 	glEnd();
+}
+
+void rectTextura(vec3 p1, vec3 p2, vec3 p3, vec3 p4) {
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0); glVertex3fv(&p1.x);
+	glTexCoord2f(1.0, 0.0); glVertex3fv(&p2.x);
+	glTexCoord2f(1.0, 1.0); glVertex3fv(&p3.x);
+	glTexCoord2f(0.0, 1.0); glVertex3fv(&p4.x);
+	glEnd();
+}
+void desenharCuboTextura(unsigned int& id, float largura, float altura, float expessura, Textura* tex) {
+	//float d = s / 2.0;
+
+	vec3 v1(-largura, altura, expessura);
+	vec3 v2(-largura, -altura, expessura);
+	vec3 v3(largura, -altura, expessura);
+	vec3 v4(largura, altura, expessura);
+
+	vec3 v5(largura, altura, -expessura);
+	vec3 v6(largura, -altura, -expessura);
+	vec3 v7(-largura, -altura, -expessura);
+	vec3 v8(-largura, altura, -expessura);
+
+	glNewList(id, GL_COMPILE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	tex->Bind();
+	
+	//frente
+	rectTextura(v1, v2, v3, v4);
+
+	//direita
+	rectTextura(v4, v3, v6, v5);
+
+	//back
+	rectTextura(v5, v8, v7, v6);
+
+	//esquerda
+	rectTextura(v1, v8, v7, v2);
+
+	//topo
+	rectTextura(v1, v4, v5, v8);
+
+	//bottom
+	rectTextura(v2, v7, v6, v3);
+	
+	tex->UnBind();
+	glEndList();
 }
 void desenharCubo(unsigned int& id, float largura, float altura, float expessura, color cor) {
 	//float d = s / 2.0;
