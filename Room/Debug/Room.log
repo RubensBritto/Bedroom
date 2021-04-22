@@ -1,0 +1,29 @@
+﻿  main.cpp
+d:\users\ruben\source\repos\room\cores.h(5): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\cores.h(7): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\cores.h(10): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\cores.h(12): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\cores.h(13): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\cores.h(14): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\cores.h(15): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\primitivas.h(107): warning C4305: 'inicializando': truncamento de 'double' para 'GLfloat'
+d:\users\ruben\source\repos\room\primitivas.h(113): warning C4244: 'inicializando': conversão de 'double' para 'GLfloat', possível perda de dados
+d:\users\ruben\source\repos\room\camera.h(15): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(46): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
+d:\users\ruben\source\repos\room\main.cpp(49): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
+d:\users\ruben\source\repos\room\main.cpp(50): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
+d:\users\ruben\source\repos\room\main.cpp(134): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(145): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(161): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(165): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(166): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(167): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(168): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(169): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(170): warning C4305: 'argumento': truncamento de 'double' para 'float'
+d:\users\ruben\source\repos\room\main.cpp(175): warning C4244: 'inicializando': conversão de 'double' para 'float', possível perda de dados
+d:\users\ruben\source\repos\room\main.cpp(184): warning C4305: 'argumento': truncamento de 'double' para 'GLfloat'
+d:\users\ruben\source\repos\room\main.cpp(214): warning C4305: 'argumento': truncamento de 'double' para 'GLfloat'
+d:\users\ruben\source\repos\room\main.cpp(409): warning C4305: 'argumento': truncamento de 'double' para 'GLfloat'
+d:\users\ruben\source\repos\room\main.cpp(417): warning C4305: 'argumento': truncamento de 'double' para 'GLfloat'
+  Room.vcxproj -> D:\Users\ruben\source\repos\Room\Debug\Room.exe

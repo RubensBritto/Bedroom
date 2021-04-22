@@ -1,4 +1,0 @@
-﻿  camera.cpp
-c:\users\lucas\desktop\códigos\room\camera.h(15): warning C4305: 'inicializando': truncamento de 'double' para 'float'
-c:\users\lucas\desktop\códigos\room\camera.cpp(64): warning C4244: 'return': conversão de 'double' para 'float', possível perda de dados
-  Room.vcxproj -> C:\Users\lucas\Desktop\Códigos\Room\Debug\Room.exe
