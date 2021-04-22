@@ -11,7 +11,8 @@
 static float angulo = 0.0;
 static float lastMousePos = 0.0;
 static bool firstTimeMouse = true;
-bool porta_aberta = 0;
+int porta_aberta = 0;
+int janela_aberta = 0;
 
 //display list
 unsigned int esferaID[3];
@@ -38,13 +39,13 @@ void teclado_callback(GLFWwindow* window, int key, int scancode, int action, int
 	else if (key == GLFW_KEY_D && (action == GLFW_PRESS || action == GLFW_REPEAT)) {//direita
 		cam.direita();
 	}
-	else if (key == GLFW_KEY_K && (action == GLFW_PRESS)) {
-		glPushMatrix();
-		glTranslatef(-70.0, -4.0, -3.0);
-		glRotated(90, 0, -1, 0);
-		glScalef(1.0, 1.0, 1.0);
-		glCallList(cuboID[8]);
-		glPopMatrix();
+	else if (key == GLFW_KEY_P && (action == GLFW_PRESS)) {
+
+		porta_aberta = (porta_aberta + 1) % 2;
+	}
+	else if (key == GLFW_KEY_J && (action == GLFW_PRESS)) {
+
+		janela_aberta = (janela_aberta + 1) % 2;
 	}
 }
 
@@ -248,19 +249,40 @@ void desenha(float dt, GLFWwindow* window) {
 
 	//janela 1
 	glPushMatrix();
-	glTranslatef(-28.0, 0.0, 1.0);
+	if (janela_aberta == 0) {
+		glTranslatef(-28.0, 0.0, 1.0);
+	}
+	else {
+		glTranslatef(-25.0, 0.0,3.0);
+		glRotated(90, 0, -1, 0);
+	}
 	glCallList(cuboID[6]);
 	glPopMatrix();
 
 	//janela 2
 	glPushMatrix();
-	glTranslatef(-36.0, 0.0, 1.0);
+	if (janela_aberta == 0) {
+		glTranslatef(-36.0, 0.0, 1.0);		
+	}
+	else {
+		glTranslatef(-39.0, 0.0, 3.0);
+		glRotated(90, 0, -1, 0);
+	}
 	glCallList(cuboID[7]);
 	glPopMatrix();
 
-	//portar
+	//porta
+
 	glPushMatrix();
+
+	if (porta_aberta == 0) {
 	glTranslatef(-70.0, -4.0, 1.0);
+	}
+	else {
+		glTranslatef(-75.0, -4.0, 6.0);
+		glRotated(90, 0,1,0);
+	}
+	
 	glCallList(cuboID[8]);
 	glPopMatrix();
 	
@@ -358,7 +380,7 @@ void desenha(float dt, GLFWwindow* window) {
 	//quadro
 	glPushMatrix();
 	glTranslatef(0.0, 3.0, -99.0);
-	glRotated(90.0, 0.0, 0.0, 1.0);
+	//glRotated(180, 0.0, 0.0, 1.0);
 	glCallList(cuboID[22]);
 	glPopMatrix();
 
@@ -451,14 +473,14 @@ void desenha(float dt, GLFWwindow* window) {
 	//porta do armario 1
 	glPushMatrix();
 	glTranslatef(-41, 0.0, -89.0);
-	glRotated(180, 1, 0, 0);
+	//glRotated(180, 1, 0, 0);
 	glCallList(cuboID[36]);
 	glPopMatrix();
 
 	//porta do armario 2
 	glPushMatrix();
 	glTranslatef(-49, 0.0, -89.0);
-	glRotated(180, 1, 0, 0);
+	//glRotated(180, 1, 0, 0);
 	glCallList(cuboID[37]);
 	glPopMatrix();
 	   

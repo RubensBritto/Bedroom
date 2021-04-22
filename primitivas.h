@@ -42,7 +42,7 @@ void desenharCuboTextura(unsigned int& id, float largura, float altura, float ex
 	tex->Bind();
 	
 	//frente
-	rectTextura(v1, v2, v3, v4);
+	rectTextura(v2,v3,v4,v1);
 
 	//direita
 	rectTextura(v4, v3, v6, v5);
