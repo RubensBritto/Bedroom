@@ -7,7 +7,6 @@
 #include "camera.h"
 
 
-static float angulo = 0.0;
 static float lastMousePos = 0.0;
 static bool firstTimeMouse = true;
 int porta_aberta = 0;
@@ -17,11 +16,16 @@ float angulo_vent = 0;
 //display list
 unsigned int esferaID[3];
 unsigned int cuboID[100];
-enum { BRICK, PAINTED, MASK, WOOD, MURO, LENCOL, QUADRO, MADEIRA, TECIDO, TETO, PISO, PORTA, PORTA_ARMARIO, ARMARIO, TAPETE, RELOGIO, NOTEBOOK, LIVRO,
-SOFA};
-Textura cuboTextura[30];
 
-camera cam(vec3(0, 0, -45.0));
+enum { BRICK, PAINTED, MASK, WOOD, 
+		MURO, LENCOL, QUADRO, MADEIRA, 
+		TECIDO, TETO, PISO, PORTA, 
+		PORTA_ARMARIO, ARMARIO, TAPETE, 
+		RELOGIO, NOTEBOOK, LIVRO, SOFA
+};
+
+Textura cuboTextura[30]; //Array para colocar o enum das texturas
+camera cam(vec3(0, 0, -45.0)); //Onde a camera inicia
 
 void teclado_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
@@ -264,14 +268,10 @@ void init(GLFWwindow* window) {
 	desenharCuboTextura(cuboID[66], 3.0, 0.7, 18.0, tex6); // encosto sofa
 }
 
-void desenha(float dt, GLFWwindow* window) {
-
-	float veloc_angular = 60.0 * dt; //60 graus por segundo
+void desenha(GLFWwindow* window) {
 
 	glLoadIdentity();
 	cam.ativar();
-
-	//glCallList(terrenoID);
 
 	//piso
 	glPushMatrix();
@@ -349,7 +349,7 @@ void desenha(float dt, GLFWwindow* window) {
 	}
 	else {
 		glTranslatef(-75.0, -4.0, 6.0);
-		glRotated(90, 0,1,0);
+		glRotated(90.0, 0, 1, 0);
 	}
 	
 	glCallList(cuboID[8]);
@@ -702,6 +702,9 @@ void desenha(float dt, GLFWwindow* window) {
 	glPopMatrix();
 
 	angulo_vent += 0.5;
+	if (angulo_vent >= 360) {
+		angulo_vent = 0.0;
+	}
 
 	//assento sofa
 	glPushMatrix();
@@ -774,16 +777,9 @@ int main(void)
 	init(window);
 
 
-	float valor = 0.0;
-	float lasTime = 0.0;
-
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
-
-		float currentTime = (float)glfwGetTime();
-		float dt = currentTime - lasTime;
-		lasTime = currentTime;
 
 		/* Poll for and process events */
 		glfwPollEvents();
@@ -795,7 +791,7 @@ int main(void)
 		glfwGetFramebufferSize(window, &largura, &altura);
 
 		redimensionar(largura, altura);
-		desenha(dt, window);
+		desenha(window);
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
 
