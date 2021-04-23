@@ -98,6 +98,14 @@ void init(GLFWwindow* window) {
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	//glEnable(GL_DEPTH_TEST);
+	// TEMOS 67 OBJETOS
+	for (int i = 0; i < 100; i++) {
+		if (i == 0)
+			cuboID[0] = glGenLists(100);
+		else
+			cuboID[i] = cuboID[0] + i;
+	}
+	/*
 	cuboID[0] = glGenLists(100);
 	cuboID[1] = cuboID[0] + 1;
 	cuboID[2] = cuboID[0] + 2;
@@ -166,7 +174,7 @@ void init(GLFWwindow* window) {
 	cuboID[65] = cuboID[0] + 65;
 	cuboID[66] = cuboID[0] + 66;
 	cuboID[67] = cuboID[0] + 67;
-
+	*/
 
 	
 	//inicializar texturas
@@ -268,11 +276,7 @@ void init(GLFWwindow* window) {
 	desenharCuboTextura(cuboID[66], 3.0, 0.7, 18.0, tex6); // encosto sofa
 }
 
-void desenha(GLFWwindow* window) {
-
-	glLoadIdentity();
-	cam.ativar();
-
+void desenharQuarto() {
 	//piso
 	glPushMatrix();
 	glTranslatef(0.0, -13.8, -51.0);
@@ -309,6 +313,7 @@ void desenha(GLFWwindow* window) {
 	glCallList(cuboID[4]);
 	glPopMatrix();
 
+	//PARTES DAS PAREDES DA PORTA E SALA
 
 	//parede frente 1
 	glPushMatrix();
@@ -316,51 +321,12 @@ void desenha(GLFWwindow* window) {
 	glCallList(cuboID[5]);
 	glPopMatrix();
 
-	//janela 1
-	glPushMatrix();
-	if (janela_aberta == 0) {
-		glTranslatef(-28.0, 0.0, 1.0);
-	}
-	else {
-		glTranslatef(-25.0, 0.0,3.0);
-		glRotated(90, 0, -1, 0);
-	}
-	glCallList(cuboID[6]);
-	glPopMatrix();
-
-	//janela 2
-	glPushMatrix();
-	if (janela_aberta == 0) {
-		glTranslatef(-36.0, 0.0, 1.0);		
-	}
-	else {
-		glTranslatef(-39.0, 0.0, 3.0);
-		glRotated(90, 0, -1, 0);
-	}
-	glCallList(cuboID[7]);
-	glPopMatrix();
-
-	//porta
-
-	glPushMatrix();
-
-	if (porta_aberta == 0) {
-	glTranslatef(-70.0, -4.0, 1.0);
-	}
-	else {
-		glTranslatef(-75.0, -4.0, 6.0);
-		glRotated(90.0, 0, 1, 0);
-	}
-	
-	glCallList(cuboID[8]);
-	glPopMatrix();
-	
 	//parede frente 2
 	glPushMatrix();
 	glTranslatef(-52.0, -1.0, 1.0);
 	glCallList(cuboID[9]);
 	glPopMatrix();
-	
+
 	//parede frente 3
 	glPushMatrix();
 	glTranslatef(-25.0, 8.5, 1.0);
@@ -390,13 +356,59 @@ void desenha(GLFWwindow* window) {
 	glTranslatef(-17.0, 0.0, 1.0);
 	glCallList(cuboID[14]);
 	glPopMatrix();
+}
 
-	//pes da cama - superior direito
+void desenharPortasEJanelas() {
+	//janela 1
+	glPushMatrix();
+	if (janela_aberta == 0) {
+		glTranslatef(-28.0, 0.0, 1.0);
+	}
+	else {
+		glTranslatef(-25.0, 0.0, 3.0);
+		glRotated(90, 0, -1, 0);
+	}
+	glCallList(cuboID[6]);
+	glPopMatrix();
+
+	//janela 2
+	glPushMatrix();
+	if (janela_aberta == 0) {
+		glTranslatef(-36.0, 0.0, 1.0);
+	}
+	else {
+		glTranslatef(-39.0, 0.0, 3.0);
+		glRotated(90, 0, -1, 0);
+	}
+	glCallList(cuboID[7]);
+	glPopMatrix();
+
+	//porta
+
+	glPushMatrix();
+
+	if (porta_aberta == 0) {
+		glTranslatef(-70.0, -4.0, 1.0);
+	}
+	else {
+		glTranslatef(-75.0, -4.0, 6.0);
+		glRotated(90.0, 0, 1, 0);
+	}
+
+	glCallList(cuboID[8]);
+	glPopMatrix();
+}
+
+void desenharObjObrigatorios() {
+
+	// cama, mesa, cadeira, ventilador e quadro;
+
+	// pes da cama - superior direito
 	glPushMatrix();
 	glTranslatef(85.0, -10.0, -31.0);
 	glCallList(cuboID[15]);
 	glPopMatrix();
-	
+
 	//pes da cama - superior esquedo
 	glPushMatrix();
 	glTranslatef(85.0, -10.0, -49.0);
@@ -440,7 +452,6 @@ void desenha(GLFWwindow* window) {
 	//quadro
 	glPushMatrix();
 	glTranslatef(0.0, 3.0, -99.0);
-	//glRotated(180, 0.0, 0.0, 1.0);
 	glCallList(cuboID[22]);
 	glPopMatrix();
 
@@ -476,13 +487,6 @@ void desenha(GLFWwindow* window) {
 	glCallList(cuboID[27]);
 	glPopMatrix();
 
-	//puf
-	glPushMatrix();
-	glTranslatef(50.0, -9.0, -93.0);
-	//glRotated(90.0, 1.0, 0.0, 0.0);
-	glCallList(cuboID[28]);
-	glPopMatrix();
-
 	//pes da cadeira - superior direito
 	glPushMatrix();
 	glTranslatef(77.0, -10.0, -87.0);
@@ -494,7 +498,7 @@ void desenha(GLFWwindow* window) {
 	glTranslatef(72.0, -10.0, -87.0);
 	glCallList(cuboID[30]);
 	glPopMatrix();
-	
+
 	//pes da cadeira - inferior direito
 	glPushMatrix();
 	glTranslatef(77.0, -10.0, -83.0);
@@ -540,7 +544,74 @@ void desenha(GLFWwindow* window) {
 	glTranslatef(-49, 0.0, -89.0);
 	glCallList(cuboID[37]);
 	glPopMatrix();
-	
+
+	//base ventilador
+	glPushMatrix();
+	glTranslatef(-80, -12.0, -10.0);
+	glCallList(cuboID[54]);
+	glPopMatrix();
+
+	//tubo ventilador
+	glPushMatrix();
+	glTranslatef(-80, -6.0, -10.0);
+	glCallList(cuboID[55]);
+	glPopMatrix();
+
+	//parafuso ventilador
+	glPushMatrix();
+	glTranslatef(-79, 0.0, -10.0);
+	glRotatef(90.0, 0.0, 0.0, 1.0);
+	glCallList(cuboID[56]);
+	glPopMatrix();
+
+	//helice 1 ventilador
+	glPushMatrix();
+	glTranslatef(-78.0, 0.0, -10.0);
+	glRotatef(90.0, 0.0, 1.0, 0.0);
+	glRotatef(-angulo_vent, 0, 0, 1);
+	glCallList(cuboID[57]);
+	glPopMatrix();
+
+	//helice 2 ventilador
+	glPushMatrix();
+	glTranslatef(-77.7, 0.0, -10.0);
+	glRotatef(90.0, 0.0, 1.0, 1.0);
+	glRotatef(-angulo_vent, 0, 0, 1);
+	glCallList(cuboID[58]);
+	glPopMatrix();
+
+	//helice 3 ventilador
+	glPushMatrix();
+	glTranslatef(-77.3, 0.0, -10.0);
+	glRotatef(90.0, 0.0, 1.0, -1.0);
+	glRotatef(-angulo_vent, 0, 0, 1);
+	glCallList(cuboID[59]);
+	glPopMatrix();
+
+	//helice 4 ventilador
+	glPushMatrix();
+	glTranslatef(-77, 0.0, -10.0);
+	glRotatef(120.0, 1.0, 1.0, 1.0);
+	glRotatef(-angulo_vent, 0, 0, 1);
+	glCallList(cuboID[60]);
+	glPopMatrix();
+
+	angulo_vent += 0.5;
+	if (angulo_vent >= 360) {
+		angulo_vent = 0.0;
+	}
+
+}
+
+void desenharObjExtras() {
+	// puf
+
+	glPushMatrix();
+	glTranslatef(50.0, -9.0, -93.0);
+	glCallList(cuboID[28]);
+	glPopMatrix();
+
+
 	//tapete
 	glPushMatrix();
 	glTranslatef(0.0, -12.0, -45.0);
@@ -589,7 +660,7 @@ void desenha(GLFWwindow* window) {
 	glRotated(90.0, 1.0, 0.0, 0.0);
 	glCallList(cuboID[44]);
 	glPopMatrix();
-	
+
 	//notebook
 	glPushMatrix();
 	glTranslatef(75.0, -4.5, -93.0);
@@ -649,62 +720,6 @@ void desenha(GLFWwindow* window) {
 	glTranslatef(76.9, -7.0, -15.0);
 	glCallList(cuboID[53]);
 	glPopMatrix();
-	
-	//base ventilador
-	glPushMatrix();
-	glTranslatef(-80, -12.0, -10.0);
-	glCallList(cuboID[54]);
-	glPopMatrix();
-
-	//tubo ventilador
-	glPushMatrix();
-	glTranslatef(-80, -6.0, -10.0);
-	glCallList(cuboID[55]);
-	glPopMatrix();
-
-	//parafuso ventilador
-	glPushMatrix();
-	glTranslatef(-79, 0.0, -10.0);
-	glRotatef(90.0, 0.0, 0.0, 1.0);
-	glCallList(cuboID[56]);
-	glPopMatrix();
-
-	//helice 1 ventilador
-	glPushMatrix();
-	glTranslatef(-78.0, 0.0, -10.0);
-	glRotatef(90.0, 0.0, 1.0, 0.0);
-	glRotatef(-angulo_vent, 0, 0, 1);
-	glCallList(cuboID[57]);
-	glPopMatrix();
-
-	//helice 2 ventilador
-	glPushMatrix();
-	glTranslatef(-77.7, 0.0, -10.0);
-	glRotatef(90.0, 0.0, 1.0, 1.0);
-	glRotatef(-angulo_vent, 0, 0, 1);
-	glCallList(cuboID[58]);
-	glPopMatrix();
-
-	//helice 3 ventilador
-	glPushMatrix();
-	glTranslatef(-77.3, 0.0, -10.0);
-	glRotatef(90.0, 0.0, 1.0, -1.0);
-	glRotatef(-angulo_vent, 0, 0, 1);
-	glCallList(cuboID[59]);
-	glPopMatrix();
-
-	//helice 4 ventilador
-	glPushMatrix();
-	glTranslatef(-77, 0.0, -10.0);
-	glRotatef(120.0, 1.0, 1.0, 1.0);
-	glRotatef(-angulo_vent, 0, 0, 1);
-	glCallList(cuboID[60]);
-	glPopMatrix();
-
-	angulo_vent += 0.5;
-	if (angulo_vent >= 360) {
-		angulo_vent = 0.0;
-	}
 
 	//assento sofa
 	glPushMatrix();
@@ -747,6 +762,18 @@ void desenha(GLFWwindow* window) {
 	glCallList(cuboID[66]);
 	glPopMatrix();
 }
+void desenha(GLFWwindow* window) {
+
+	glLoadIdentity();
+	cam.ativar();
+	
+	//desenha os itens do quarto
+	desenharQuarto();
+	desenharPortasEJanelas();
+	desenharObjObrigatorios();
+	desenharObjExtras();
+}
+
 void redimensionar(int w, int h) {
 	glViewport(0, 0, w, h);
 	float aspect = (float)w / (float)h;
