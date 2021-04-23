@@ -12,6 +12,7 @@ static float lastMousePos = 0.0;
 static bool firstTimeMouse = true;
 int porta_aberta = 0;
 int janela_aberta = 0;
+float angulo_vent = 0;
 
 //display list
 unsigned int esferaID[3];
@@ -651,50 +652,56 @@ void desenha(float dt, GLFWwindow* window) {
 	
 	//base ventilador
 	glPushMatrix();
-	glTranslatef(40.0, -12.0, -45.0);
+	glTranslatef(-80, -12.0, -10.0);
 	glCallList(cuboID[54]);
 	glPopMatrix();
 
 	//tubo ventilador
 	glPushMatrix();
-	glTranslatef(40.0, -6.0, -45.0);
+	glTranslatef(-80, -6.0, -10.0);
 	glCallList(cuboID[55]);
 	glPopMatrix();
 
 	//parafuso ventilador
 	glPushMatrix();
-	glTranslatef(41.0, 0.0, -45.0);
+	glTranslatef(-79, 0.0, -10.0);
 	glRotatef(90.0, 0.0, 0.0, 1.0);
 	glCallList(cuboID[56]);
 	glPopMatrix();
 
 	//helice 1 ventilador
 	glPushMatrix();
-	glTranslatef(42.0, 0.0, -45.0);
+	glTranslatef(-78.0, 0.0, -10.0);
 	glRotatef(90.0, 0.0, 1.0, 0.0);
+	glRotatef(-angulo_vent, 0, 0, 1);
 	glCallList(cuboID[57]);
 	glPopMatrix();
 
 	//helice 2 ventilador
 	glPushMatrix();
-	glTranslatef(42.3, 0.0, -45.0);
+	glTranslatef(-77.7, 0.0, -10.0);
 	glRotatef(90.0, 0.0, 1.0, 1.0);
+	glRotatef(-angulo_vent, 0, 0, 1);
 	glCallList(cuboID[58]);
 	glPopMatrix();
 
 	//helice 3 ventilador
 	glPushMatrix();
-	glTranslatef(42.7, 0.0, -45.0);
+	glTranslatef(-77.3, 0.0, -10.0);
 	glRotatef(90.0, 0.0, 1.0, -1.0);
+	glRotatef(-angulo_vent, 0, 0, 1);
 	glCallList(cuboID[59]);
 	glPopMatrix();
 
 	//helice 4 ventilador
 	glPushMatrix();
-	glTranslatef(43.0, 0.0, -45.0);
+	glTranslatef(-77, 0.0, -10.0);
 	glRotatef(120.0, 1.0, 1.0, 1.0);
+	glRotatef(-angulo_vent, 0, 0, 1);
 	glCallList(cuboID[60]);
 	glPopMatrix();
+
+	angulo_vent += 0.5;
 
 	//assento sofa
 	glPushMatrix();
