@@ -63,7 +63,6 @@ void desenharCuboTextura(unsigned int& id, float largura, float altura, float ex
 	glEndList();
 }
 void desenharCubo(unsigned int& id, float largura, float altura, float expessura, color cor) {
-	//float d = s / 2.0;
 
 	vec3 v1(-largura, altura, expessura);
 	vec3 v2(-largura, -altura, expessura);

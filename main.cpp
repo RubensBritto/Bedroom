@@ -5,7 +5,6 @@
 #include "cores.h"
 #include "primitivas.h"
 #include "camera.h"
-//#include "Textura.h"
 
 
 static float angulo = 0.0;
@@ -16,9 +15,10 @@ int janela_aberta = 0;
 
 //display list
 unsigned int esferaID[3];
-unsigned int cuboID[40];
-enum { BRICK, PAINTED, MASK, WOOD, MURO, LENCOL, QUADRO, TRAVESSEIRO, MADEIRA, TECIDO, TETO, PISO, PORTA, PORTA_ARMARIO, ARMARIO};
-Textura cuboTextura[3];
+unsigned int cuboID[100];
+enum { BRICK, PAINTED, MASK, WOOD, MURO, LENCOL, QUADRO, MADEIRA, TECIDO, TETO, PISO, PORTA, PORTA_ARMARIO, ARMARIO, TAPETE, RELOGIO, NOTEBOOK, LIVRO,
+SOFA};
+Textura cuboTextura[30];
 
 camera cam(vec3(0, 0, -45.0));
 
@@ -73,12 +73,11 @@ void init(GLFWwindow* window) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	Textura *tex0,*tex1, *tex2, *tex3, *tex4, *tex5, *tex6, *tex7, *tex8, *text9, *text10;
+	Textura *tex0,*tex1, *tex2, *tex3, *tex4, *tex5, *tex6, *tex7, *tex8, *tex9, *tex10, *tex11, *tex12, *tex13, *tex14, *tex15;
 	cuboTextura[MURO].load("imagens/muro_branco.png");
 	cuboTextura[WOOD].load("imagens/wood.png");
 	cuboTextura[LENCOL].load("imagens/lencol.png");
 	cuboTextura[QUADRO].load("imagens/quadro.png");
-	cuboTextura[TRAVESSEIRO].load("imagens/travesseiro.png");
 	cuboTextura[MADEIRA].load("imagens/madeira.png");
 	cuboTextura[TECIDO].load("imagens/tecido.png");
 	cuboTextura[TETO].load("imagens/teto.png");
@@ -86,10 +85,15 @@ void init(GLFWwindow* window) {
 	cuboTextura[PORTA].load("imagens/porta.png");
 	cuboTextura[PORTA_ARMARIO].load("imagens/porta_armario.png");
 	cuboTextura[ARMARIO].load("imagens/armario.png");
+	cuboTextura[TAPETE].load("imagens/tapete.png");
+	cuboTextura[RELOGIO].load("imagens/relogio.png");
+	cuboTextura[NOTEBOOK].load("imagens/notebook.png");
+	cuboTextura[LIVRO].load("imagens/livro.png");
+	cuboTextura[SOFA].load("imagens/sofa.png");
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	//glEnable(GL_DEPTH_TEST);
-	cuboID[0] = glGenLists(30);
+	cuboID[0] = glGenLists(100);
 	cuboID[1] = cuboID[0] + 1;
 	cuboID[2] = cuboID[0] + 2;
 	cuboID[3] = cuboID[0] + 3;
@@ -127,6 +131,36 @@ void init(GLFWwindow* window) {
 	cuboID[35] = cuboID[0] + 35;
 	cuboID[36] = cuboID[0] + 36;
 	cuboID[37] = cuboID[0] + 37;
+	cuboID[38] = cuboID[0] + 38;
+	cuboID[39] = cuboID[0] + 39;
+	cuboID[40] = cuboID[0] + 40;
+	cuboID[41] = cuboID[0] + 41;
+	cuboID[42] = cuboID[0] + 42;
+	cuboID[43] = cuboID[0] + 43;
+	cuboID[44] = cuboID[0] + 44;
+	cuboID[45] = cuboID[0] + 45;
+	cuboID[46] = cuboID[0] + 46;
+	cuboID[47] = cuboID[0] + 47;
+	cuboID[48] = cuboID[0] + 48;
+	cuboID[49] = cuboID[0] + 49;
+	cuboID[50] = cuboID[0] + 50;
+	cuboID[51] = cuboID[0] + 51;
+	cuboID[52] = cuboID[0] + 52;
+	cuboID[53] = cuboID[0] + 53;
+	cuboID[54] = cuboID[0] + 54;
+	cuboID[55] = cuboID[0] + 55;
+	cuboID[56] = cuboID[0] + 56;
+	cuboID[57] = cuboID[0] + 57;
+	cuboID[58] = cuboID[0] + 58;
+	cuboID[59] = cuboID[0] + 59;
+	cuboID[60] = cuboID[0] + 60;
+	cuboID[61] = cuboID[0] + 61;
+	cuboID[62] = cuboID[0] + 62;
+	cuboID[63] = cuboID[0] + 63;
+	cuboID[64] = cuboID[0] + 64;
+	cuboID[65] = cuboID[0] + 65;
+	cuboID[66] = cuboID[0] + 66;
+	cuboID[67] = cuboID[0] + 67;
 
 
 	
@@ -140,9 +174,13 @@ void init(GLFWwindow* window) {
 	tex6 = &cuboTextura[TECIDO];
 	tex7 = &cuboTextura[PISO];
 	tex8 = &cuboTextura[PORTA];
-	text9 = &cuboTextura[PORTA_ARMARIO];
-	text10 = &cuboTextura[ARMARIO];
-
+	tex9 = &cuboTextura[PORTA_ARMARIO];
+	tex10 = &cuboTextura[ARMARIO];
+	tex11 = &cuboTextura[TAPETE];
+	tex12 = &cuboTextura[RELOGIO];
+	tex13 = &cuboTextura[NOTEBOOK];
+	tex14 = &cuboTextura[LIVRO];
+	tex15 = &cuboTextura[SOFA];
 
 	//largura, altura, expessura
 	desenharCuboTextura(cuboID[0], 90.0, 50.0, 1.0,tex7); //piso
@@ -187,10 +225,42 @@ void init(GLFWwindow* window) {
 	desenharCubo(cuboID[33], 3.0, 4.0, 0.157, preto); //assento caderia
 	desenharCubo(cuboID[34], 4.0, 3.0, 0.2, preto); //encosto caderia
 
-	desenharCuboTextura(cuboID[35], 9, 12, 5.0, text10);	//armario
-	desenharCuboTextura(cuboID[36], 3.5, 9.0, 0.5, text9);		//porta do armario 1
-	desenharCuboTextura(cuboID[37], 3.5, 9.0, 0.5, text9);		//porta do armario 2
+	desenharCuboTextura(cuboID[35], 9, 12, 5.0, tex10);	//armario
+	desenharCuboTextura(cuboID[36], 3.5, 9.0, 0.5, tex9);		//porta do armario 1
+	desenharCuboTextura(cuboID[37], 3.5, 9.0, 0.5, tex9);		//porta do armario 2
+	desenharCuboTextura(cuboID[38], 20.0, 20.0, 0.2, tex11);		//tapete
+	desenharCuboTextura(cuboID[39], 2.0, 2.0, 0.15, tex12);	//relogio
+	
+	desenharCubo(cuboID[40], 2.0, 10.0, 0.3, preto); //perna estante 1
+	desenharCubo(cuboID[41], 2.0, 10.0, 0.3, preto); //perna estante 2
+	desenharCuboTextura(cuboID[42], 5.0, 2.0, 0.15, tex5); // partileira 1
+	desenharCuboTextura(cuboID[43], 5.0, 2.0, 0.15, tex5); // partileira 2
+	desenharCuboTextura(cuboID[44], 5.0, 2.0, 0.15, tex5); // partileira 3
+	desenharCuboTextura(cuboID[45], 5.0, 2.0, 0.1, tex13); //notebook
+	desenharCuboTextura(cuboID[46], 2.0, 4.0, 0.3, tex14); //livro
 
+	desenharCubo(cuboID[47], 3.0, 3.0, 8.0, preto); //comoda
+	desenharCuboTextura(cuboID[48], 0.2, 2.0, 0.2, tex5); //pes comoda - superior direito 
+	desenharCuboTextura(cuboID[49], 0.2, 2.0, 0.2, tex5); //pes comoda - inferior direito 
+	desenharCuboTextura(cuboID[50], 0.2, 2.0, 0.2, tex5); //pes comoda - superior esquerdo 
+	desenharCuboTextura(cuboID[51], 0.2, 2.0, 0.2, tex5); //pes comoda - inferior esquerdo 
+	desenharCuboTextura(cuboID[52], 0.1, 0.9, 6.0, tex5); //gaveta comoda 1
+	desenharCuboTextura(cuboID[53], 0.1, 0.9, 6.0, tex5); //gaveta comoda 2
+
+	desenharCubo(cuboID[54], 2.0, 0.2, 2.0, preto); //base ventilador
+	desenharCubo(cuboID[55], 0.2, 7.0, 0.2, preto); //tubo ventilador
+	desenharCubo(cuboID[56], 0.2, 1.0, 0.2, preto); //parafuso ventilador
+	desenharCubo(cuboID[57], 3.5, 0.3, 0.01, vermelho); //helice 1 ventilador
+	desenharCubo(cuboID[58], 3.5, 0.3, 0.01, vermelho); //helice 2 ventilador
+	desenharCubo(cuboID[59], 3.5, 0.3, 0.01, vermelho); //helice 3 ventilador
+	desenharCubo(cuboID[60], 3.5, 0.3, 0.01, vermelho); //helice 4 ventilador
+	
+	desenharCuboTextura(cuboID[61], 5.0, 0.7, 20.0, tex6); // assento sofa
+	desenharCuboTextura(cuboID[62], 0.2, 2.0, 0.2, tex5); //pe sofa -  superior esquerdo
+	desenharCuboTextura(cuboID[63], 0.2, 2.0, 0.2, tex5); //pe sofa - superior direito 
+	desenharCuboTextura(cuboID[64], 0.2, 2.0, 0.2, tex5); //pe sofa - inferior esquerdo 
+	desenharCuboTextura(cuboID[65], 0.2, 2.0, 0.2, tex5); // pe sofa - inferior direito
+	desenharCuboTextura(cuboID[66], 3.0, 0.7, 18.0, tex6); // encosto sofa
 }
 
 void desenha(float dt, GLFWwindow* window) {
@@ -204,9 +274,8 @@ void desenha(float dt, GLFWwindow* window) {
 
 	//piso
 	glPushMatrix();
-	glTranslatef(0.0, -13.8, -50.0);
+	glTranslatef(0.0, -13.8, -51.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
-	//glScalef(3.0, 1.0, 3.0);
 	glCallList(cuboID[0]);
 	glPopMatrix();
 
@@ -214,7 +283,6 @@ void desenha(float dt, GLFWwindow* window) {
 	//parede fundo
 	glPushMatrix();
 	glTranslatef(0.0, -1.0, -100.0);
-	//glScalef(2.0, 1.0, 1.0);
 	glCallList(cuboID[1]);
 	glPopMatrix();
 
@@ -285,15 +353,6 @@ void desenha(float dt, GLFWwindow* window) {
 	
 	glCallList(cuboID[8]);
 	glPopMatrix();
-	
-	/* Abrir e fechar as portas e janelas
-	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS){
-		glPushMatrix();
-		glTranslatef(-20.0, -2.0, -25.0);
-		glCallList(cuboID[8]);
-		glPopMatrix();
-	}
-	*/
 	
 	//parede frente 2
 	glPushMatrix();
@@ -466,24 +525,217 @@ void desenha(float dt, GLFWwindow* window) {
 	//armario
 	glPushMatrix();
 	glTranslatef(-45, -1.0, -94.0);
-	//glRotated(90.0, 0.0, 0.0, 1.0);
 	glCallList(cuboID[35]);
 	glPopMatrix();
 
 	//porta do armario 1
 	glPushMatrix();
 	glTranslatef(-41, 0.0, -89.0);
-	//glRotated(180, 1, 0, 0);
 	glCallList(cuboID[36]);
 	glPopMatrix();
 
 	//porta do armario 2
 	glPushMatrix();
 	glTranslatef(-49, 0.0, -89.0);
-	//glRotated(180, 1, 0, 0);
 	glCallList(cuboID[37]);
 	glPopMatrix();
-	   
+	
+	//tapete
+	glPushMatrix();
+	glTranslatef(0.0, -12.0, -45.0);
+	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[38]);
+	glPopMatrix();
+
+	//relogio
+	glPushMatrix();
+	glTranslatef(88.0, 9.0, -40.0);
+	glRotatef(90.0, 0.0, -1.0, 0.0);
+	glCallList(cuboID[39]);
+	glPopMatrix();
+
+	//perna estante 1
+	glPushMatrix();
+	glTranslatef(30.2, -5.0, -5.0);
+	glRotated(180.0, 1.0, 0.0, 1.0);
+	glCallList(cuboID[40]);
+	glPopMatrix();
+
+	//perna estante 2
+	glPushMatrix();
+	glTranslatef(19.8, -5.0, -5.0);
+	glRotated(180.0, 1.0, 0.0, 1.0);
+	glCallList(cuboID[41]);
+	glPopMatrix();
+
+	//partileira 1 estante
+	glPushMatrix();
+	glTranslatef(25.0, -8.0, -5.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[42]);
+	glPopMatrix();
+
+	//partileira 2 estante
+	glPushMatrix();
+	glTranslatef(25.0, -2.0, -5.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[43]);
+	glPopMatrix();
+
+	//partileira 3 estante
+	glPushMatrix();
+	glTranslatef(25.0, 5.0, -5.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[44]);
+	glPopMatrix();
+	
+	//notebook
+	glPushMatrix();
+	glTranslatef(75.0, -4.5, -93.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[45]);
+	glPopMatrix();
+
+	//livro
+	glPushMatrix();
+	glTranslatef(65.0, -4.5, -93.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[46]);
+	glPopMatrix();
+
+	//comoda
+	glPushMatrix();
+	glTranslatef(80.0, -6.0, -15.0);
+	glCallList(cuboID[47]);
+	glPopMatrix();
+
+	//comoda pes direito superior
+	glPushMatrix();
+	glTranslatef(85.0, -11.0, -9.0);
+	glRotated(15.0, -1.0, 0.0, 0.0);
+	glCallList(cuboID[48]);
+	glPopMatrix();
+
+	//comoda pes direito inferior
+	glPushMatrix();
+	glTranslatef(80.0, -11.0, -9.0);
+	glRotated(15.0, -1.0, 0.0, 0.0);
+	glCallList(cuboID[49]);
+	glPopMatrix();
+
+	//comoda pes esquerdo superior
+	glPushMatrix();
+	glTranslatef(85.0, -11.0, -20.0);
+	glRotated(15.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[50]);
+	glPopMatrix();
+
+	//comoda pes direito inferior
+	glPushMatrix();
+	glTranslatef(80.0, -11.0, -20.0);
+	glRotated(15.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[51]);
+	glPopMatrix();
+
+	//gaveta comoda - 1
+	glPushMatrix();
+	glTranslatef(76.9, -4.5, -15.0);
+	glCallList(cuboID[52]);
+	glPopMatrix();
+
+	//gaveta comoda - 2
+	glPushMatrix();
+	glTranslatef(76.9, -7.0, -15.0);
+	glCallList(cuboID[53]);
+	glPopMatrix();
+	
+	//base ventilador
+	glPushMatrix();
+	glTranslatef(40.0, -12.0, -45.0);
+	glCallList(cuboID[54]);
+	glPopMatrix();
+
+	//tubo ventilador
+	glPushMatrix();
+	glTranslatef(40.0, -6.0, -45.0);
+	glCallList(cuboID[55]);
+	glPopMatrix();
+
+	//parafuso ventilador
+	glPushMatrix();
+	glTranslatef(41.0, 0.0, -45.0);
+	glRotatef(90.0, 0.0, 0.0, 1.0);
+	glCallList(cuboID[56]);
+	glPopMatrix();
+
+	//helice 1 ventilador
+	glPushMatrix();
+	glTranslatef(42.0, 0.0, -45.0);
+	glRotatef(90.0, 0.0, 1.0, 0.0);
+	glCallList(cuboID[57]);
+	glPopMatrix();
+
+	//helice 2 ventilador
+	glPushMatrix();
+	glTranslatef(42.3, 0.0, -45.0);
+	glRotatef(90.0, 0.0, 1.0, 1.0);
+	glCallList(cuboID[58]);
+	glPopMatrix();
+
+	//helice 3 ventilador
+	glPushMatrix();
+	glTranslatef(42.7, 0.0, -45.0);
+	glRotatef(90.0, 0.0, 1.0, -1.0);
+	glCallList(cuboID[59]);
+	glPopMatrix();
+
+	//helice 4 ventilador
+	glPushMatrix();
+	glTranslatef(43.0, 0.0, -45.0);
+	glRotatef(120.0, 1.0, 1.0, 1.0);
+	glCallList(cuboID[60]);
+	glPopMatrix();
+
+	//assento sofa
+	glPushMatrix();
+	glTranslatef(-80.0, -8.4, -50.0);
+	glCallList(cuboID[61]);
+	glPopMatrix();
+
+	//sofa pes superior esquerdo
+	glPushMatrix();
+	glTranslatef(-85.0, -11.0, -35.0);
+	glRotated(15.0, -1.0, 0.0, 0.0);
+	glCallList(cuboID[62]);
+	glPopMatrix();
+
+	//sofa pes superior direito
+	glPushMatrix();
+	glTranslatef(-85.0, -11.0, -67.0);
+	glRotated(15.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[63]);
+	glPopMatrix();
+
+	//sofa pes inferior esquerdo
+	glPushMatrix();
+	glTranslatef(-75.0, -11.0, -35.0);
+	glRotated(15.0, -1.0, 0.0, 0.0);
+	glCallList(cuboID[64]);
+	glPopMatrix();
+
+	//sofa pe inferior direito
+	glPushMatrix();
+	glTranslatef(-75.0, -11.0, -67.0);
+	glRotated(15.0, 1.0, 0.0, 0.0);
+	glCallList(cuboID[65]);
+	glPopMatrix();
+
+	//encosto sofa
+	glPushMatrix();
+	glTranslatef(-84.5, -4.7, -50.0);
+	glRotated(90.0, 0.0, 0.0, 1.0);
+	glCallList(cuboID[66]);
+	glPopMatrix();
 }
 void redimensionar(int w, int h) {
 	glViewport(0, 0, w, h);
