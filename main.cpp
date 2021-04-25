@@ -78,6 +78,7 @@ void init(GLFWwindow* window) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
 	Textura *tex0,*tex1, *tex2, *tex3, *tex4, *tex5, *tex6, *tex7, *tex8, *tex9, *tex10, *tex11, *tex12, *tex13, *tex14, *tex15;
 	cuboTextura[MURO].load("imagens/muro_branco.png");
 	cuboTextura[WOOD].load("imagens/wood.png");
@@ -97,7 +98,8 @@ void init(GLFWwindow* window) {
 	cuboTextura[SOFA].load("imagens/sofa.png");
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-	//glEnable(GL_DEPTH_TEST);
+	
+	
 	// TEMOS 67 OBJETOS
 	for (int i = 0; i < 100; i++) {
 		if (i == 0)
@@ -105,78 +107,7 @@ void init(GLFWwindow* window) {
 		else
 			cuboID[i] = cuboID[0] + i;
 	}
-	/*
-	cuboID[0] = glGenLists(100);
-	cuboID[1] = cuboID[0] + 1;
-	cuboID[2] = cuboID[0] + 2;
-	cuboID[3] = cuboID[0] + 3;
-	cuboID[4] = cuboID[0] + 4;
-	cuboID[5] = cuboID[0] + 5;
-	cuboID[6] = cuboID[0] + 6;
-	cuboID[7] = cuboID[0] + 7;
-	cuboID[8] = cuboID[0] + 8;
-	cuboID[9] = cuboID[0] + 9;
-	cuboID[10] = cuboID[0] + 10;
-	cuboID[11] = cuboID[0] + 11;
-	cuboID[12] = cuboID[0] + 12;
-	cuboID[13] = cuboID[0] + 13;
-	cuboID[14] = cuboID[0] + 14;
-	cuboID[15] = cuboID[0] + 15;
-	cuboID[16] = cuboID[0] + 16;
-	cuboID[17] = cuboID[0] + 17;
-	cuboID[18] = cuboID[0] + 18;
-	cuboID[19] = cuboID[0] + 19;
-	cuboID[20] = cuboID[0] + 20;
-	cuboID[21] = cuboID[0] + 21;
-	cuboID[22] = cuboID[0] + 22;
-	cuboID[23] = cuboID[0] + 23;
-	cuboID[24] = cuboID[0] + 24;
-	cuboID[25] = cuboID[0] + 25;
-	cuboID[26] = cuboID[0] + 26;
-	cuboID[27] = cuboID[0] + 27;
-	cuboID[28] = cuboID[0] + 28;
-	cuboID[29] = cuboID[0] + 29;
-	cuboID[30] = cuboID[0] + 30;
-	cuboID[31] = cuboID[0] + 31;
-	cuboID[32] = cuboID[0] + 32;
-	cuboID[33] = cuboID[0] + 33;
-	cuboID[34] = cuboID[0] + 34;
-	cuboID[35] = cuboID[0] + 35;
-	cuboID[36] = cuboID[0] + 36;
-	cuboID[37] = cuboID[0] + 37;
-	cuboID[38] = cuboID[0] + 38;
-	cuboID[39] = cuboID[0] + 39;
-	cuboID[40] = cuboID[0] + 40;
-	cuboID[41] = cuboID[0] + 41;
-	cuboID[42] = cuboID[0] + 42;
-	cuboID[43] = cuboID[0] + 43;
-	cuboID[44] = cuboID[0] + 44;
-	cuboID[45] = cuboID[0] + 45;
-	cuboID[46] = cuboID[0] + 46;
-	cuboID[47] = cuboID[0] + 47;
-	cuboID[48] = cuboID[0] + 48;
-	cuboID[49] = cuboID[0] + 49;
-	cuboID[50] = cuboID[0] + 50;
-	cuboID[51] = cuboID[0] + 51;
-	cuboID[52] = cuboID[0] + 52;
-	cuboID[53] = cuboID[0] + 53;
-	cuboID[54] = cuboID[0] + 54;
-	cuboID[55] = cuboID[0] + 55;
-	cuboID[56] = cuboID[0] + 56;
-	cuboID[57] = cuboID[0] + 57;
-	cuboID[58] = cuboID[0] + 58;
-	cuboID[59] = cuboID[0] + 59;
-	cuboID[60] = cuboID[0] + 60;
-	cuboID[61] = cuboID[0] + 61;
-	cuboID[62] = cuboID[0] + 62;
-	cuboID[63] = cuboID[0] + 63;
-	cuboID[64] = cuboID[0] + 64;
-	cuboID[65] = cuboID[0] + 65;
-	cuboID[66] = cuboID[0] + 66;
-	cuboID[67] = cuboID[0] + 67;
-	*/
 
-	
 	//inicializar texturas
 	tex0 = &cuboTextura[TETO];
 	tex1 = &cuboTextura[MURO];
