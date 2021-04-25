@@ -26,3 +26,13 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 * 1 luminária simulando a spot encima da mesa; 
 * Aplicar Iluminação (especular e difusa) a modelagem;
 * Aplicar mapeamento de textura em 5 objetos (no mínimo);
+
+## Controles
+
+* **mouse:** rotacionar a câmera; 
+* **w:** andar para frente;
+* **s:** andar para trás;
+* **a:** andar para esquerda;
+* **d:** andar para direita;
+* **p:** abrir/fechar a porta;
+* **j:** abrir/fechar a janela;
