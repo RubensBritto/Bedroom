@@ -36,3 +36,5 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 * **d:** andar para direita;
 * **p:** abrir/fechar a porta;
 * **j:** abrir/fechar a janela;
+* **l:** ligar/desligar a luz;
+
