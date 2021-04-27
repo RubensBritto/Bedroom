@@ -11,7 +11,8 @@ static float lastMousePos = 0.0;
 static bool firstTimeMouse = true;
 int porta_aberta = 0;
 int janela_aberta = 0;
-int luz = 1;
+int luz_0 = 1;
+int luz_1 = 1;
 float angulo_vent = 0;
 
 //display list
@@ -55,7 +56,11 @@ void teclado_callback(GLFWwindow* window, int key, int scancode, int action, int
 	}
 	else if (key == GLFW_KEY_L && (action == GLFW_PRESS)) {
 
-		luz = (luz + 1) % 2;
+		luz_0 = (luz_0 + 1) % 2;
+	}
+	else if (key == GLFW_KEY_K && (action == GLFW_PRESS)) {
+
+		luz_1 = (luz_1 + 1) % 2;
 	}
 }
 
@@ -93,7 +98,7 @@ void init(GLFWwindow* window) {
 	float globalAmb[] = { 0.2f,0.2f,0.2f,1.f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmb);
 
-	float light0[4][4]{
+	float light0[3][4]{
 		{ 0.2f,0.2f,0.2f,1.f }, // ambiente
 		{ 0.8f,0.8f,0.8f,1.f },	// difusa
 		{ 1.f,1.f,1.f,1.f },	// especular
@@ -101,6 +106,18 @@ void init(GLFWwindow* window) {
 	glLightfv(GL_LIGHT0, GL_AMBIENT, &light0[0][0]);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, &light0[1][0]);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, &light0[2][0]);
+
+	float light1[4][4]{
+		{ 0.2f,0.2f,0.2f,1.f }, // ambiente
+		{ 0.8f,0.8f,0.8f,1.f },	// difusa
+		{ 1.f,1.f,1.f,1.f },	// especular
+		{0.0f, 4.0f, -40.f,1.f} // position
+	};
+
+	glLightfv(GL_LIGHT1, GL_AMBIENT, &light1[0][0]);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, &light1[1][0]);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, &light1[2][0]);
+	glLightfv(GL_LIGHT1, GL_POSITION, &light1[3][0]);
 
 	Textura *tex0,*tex1, *tex2, *tex3, *tex4, *tex5, *tex6, *tex7, *tex8, *tex9, *tex10, *tex11, *tex12, *tex13, *tex14, *tex15;
 	cuboTextura[MURO].load("imagens/muro_branco.png");
@@ -735,11 +752,17 @@ void desenha(GLFWwindow* window) {
 	desenharObjObrigatorios();
 	desenharObjExtras();
 
-	if (luz == 1) {
+	if (luz_0 == 1) {
 		glEnable(GL_LIGHT0);
 	}
 	else {
 		glDisable(GL_LIGHT0);
+	}
+	if (luz_1 == 1) {
+		glEnable(GL_LIGHT1);
+	}
+	else {
+		glDisable(GL_LIGHT1);
 	}
 }
 
