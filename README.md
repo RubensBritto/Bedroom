@@ -38,8 +38,13 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 * **j:** abrir/fechar a janela;
 * **l:** ligar/desligar a luz;
 
-## Objetos Opcionais
+## Objetos no Quarto
 
+* Cama *(Obrigatório)*
+* Mesa *(Obrigatório)*
+* Cadeira *(Obrigatório)*
+* Ventilador *(Obrigatório)*
+* Quadro *(Obrigatório)*
 * Armário;
 * Sofá;
 * Prateleira;
