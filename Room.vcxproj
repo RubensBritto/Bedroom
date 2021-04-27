@@ -76,11 +76,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Users\ruben\source\repos\Room\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\lucas\Desktop\Códigos\Room\GLFW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\Users\ruben\source\repos\Room\GLFW\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\lucas\Desktop\Códigos\Room\GLFW\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

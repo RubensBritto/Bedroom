@@ -24,6 +24,12 @@ void rectTextura(vec3 p1, vec3 p2, vec3 p3, vec3 p4) {
 	glTexCoord2f(0.0, 1.0); glVertex3fv(&p4.x);
 	glEnd();
 }
+
+void loadMaterial(color cor) {
+	float matDiff[] = {cor[0],cor[1],cor[2],1.f};
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiff);
+}
+
 void desenharCuboTextura(unsigned int& id, float largura, float altura, float expessura, Textura* tex) {
 	//float d = s / 2.0;
 
@@ -40,23 +46,37 @@ void desenharCuboTextura(unsigned int& id, float largura, float altura, float ex
 	glNewList(id, GL_COMPILE);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	tex->Bind();
+
+
+
+	float matSpecular[] = { 1.f,1.f,1.f,1.f };
+	float matAmb[] = { 0.f,0.f,0.f,1.f };
+	glMaterialfv(GL_FRONT, GL_AMBIENT, matAmb);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpecular);
+	glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
 	
 	//frente
+	glNormal3f(0.f, 0.f, 1.f);
 	rectTextura(v2,v3,v4,v1);
 
 	//direita
+	glNormal3f(1.f, 0.f, 0.f);
 	rectTextura(v4, v3, v6, v5);
 
 	//back
+	glNormal3f(0.f, 0.f, -1.f);
 	rectTextura(v5, v8, v7, v6);
 
 	//esquerda
+	glNormal3f(-1.f, 0.f, 0.f);
 	rectTextura(v1, v8, v7, v2);
 
 	//topo
+	glNormal3f(0.f, 1.f, 0.f);
 	rectTextura(v1, v4, v5, v8);
 
 	//bottom
+	glNormal3f(0.f, -1.f, 0.f);
 	rectTextura(v2, v7, v6, v3);
 	
 	tex->UnBind();
@@ -76,22 +96,41 @@ void desenharCubo(unsigned int& id, float largura, float altura, float expessura
 
 	glNewList(id, GL_COMPILE);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	float matSpecular[] = { 1.f,1.f,1.f,1.f };
+	float matAmb[] = { 0.f,0.f,0.f,1.f };
+	glMaterialfv(GL_FRONT, GL_AMBIENT, matAmb);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpecular);
+	glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
+
 	//frente
+	glNormal3f(0.f, 0.f, 1.f);
+	loadMaterial(cor);
 	rect(v1, v2, v3, v4, cor);
 
 	//direita
+	glNormal3f(1.f, 0.f, 0.f);
+	loadMaterial(cor);
 	rect(v4, v3, v6, v5, cor);
 
 	//back
+	glNormal3f(0.f, 0.f, -1.f);
+	loadMaterial(cor);
 	rect(v5, v8, v7, v6, cor);
 
 	//esquerda
+	glNormal3f(-1.f, 0.f, 0.f);
+	loadMaterial(cor);
 	rect(v1, v8, v7, v2, cor);
 
 	//topo
+	glNormal3f(0.f, 1.f, 0.f);
+	loadMaterial(cor);
 	rect(v1, v4, v5, v8, cor);
 
 	//bottom
+	glNormal3f(0.f, -1.f, 0.f);
+	loadMaterial(cor);
 	rect(v2, v7, v6, v3, cor);
 
 	glEndList();
