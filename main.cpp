@@ -82,31 +82,25 @@ void init(GLFWwindow* window) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	
 	//Luz
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	//glEnable(GL_COLOR_MATERIAL);
-	//glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	glEnable(GL_LIGHT1);
+
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 
-	float globalAmb[] = { 0.1f,0.1f,0.1f,1.f };
+	float globalAmb[] = { 0.2f,0.2f,0.2f,1.f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmb);
 
-	float light[4][4]{
-		{ 0.1f,0.1f,0.1f,1.f }, // ambiente
+	float light0[4][4]{
+		{ 0.2f,0.2f,0.2f,1.f }, // ambiente
 		{ 0.8f,0.8f,0.8f,1.f },	// difusa
 		{ 1.f,1.f,1.f,1.f },	// especular
-		{ 0.1f,0.1f,1.f,1.f }	// posicao
 	};
-
-	glLightfv(GL_LIGHT0, GL_AMBIENT, &light[0][0]);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, &light[1][0]);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, &light[2][0]);
-	glLightfv(GL_LIGHT0, GL_POSITION, &light[3][0]);
-
-	//glShadeModel(GL_SMOOTH);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, &light0[0][0]);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, &light0[1][0]);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, &light0[2][0]);
 
 	Textura *tex0,*tex1, *tex2, *tex3, *tex4, *tex5, *tex6, *tex7, *tex8, *tex9, *tex10, *tex11, *tex12, *tex13, *tex14, *tex15;
 	cuboTextura[MURO].load("imagens/muro_branco.png");
@@ -235,6 +229,8 @@ void init(GLFWwindow* window) {
 	desenharCuboTextura(cuboID[63], 0.2, 2.0, 0.2, tex5); //pe sofa - inferior esquerdo 
 	desenharCuboTextura(cuboID[64], 0.2, 2.0, 0.2, tex5); // pe sofa - inferior direito
 	desenharCuboTextura(cuboID[65], 3.0, 0.7, 18.0, tex6); // encosto sofa
+
+	desenharCubo(cuboID[66],2.0,2.0,2.0, verde);
 }
 
 void desenharQuarto() {
@@ -544,10 +540,20 @@ void desenharObjObrigatorios() {
 	if (angulo_vent >= 360) {
 		angulo_vent = 0.0;
 	}
-
 }
 
 void desenharObjExtras() {
+	//luminaria
+	glPushMatrix();
+	glTranslated(70.f, 4.f, -95.f);
+	glCallList(cuboID[66]);
+	glPopMatrix();
+	float position_light[] = { 70.f, 4.f, -95.f,1.f };
+	float direction_light[] = { 0.0f, -1.0f, 0.0f,1.f};
+	glLightfv(GL_LIGHT0, GL_POSITION, position_light);
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, direction_light);
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 80.0);
+
 	// puf
 
 	glPushMatrix();
@@ -722,7 +728,7 @@ void desenha(GLFWwindow* window) {
 
 	glLoadIdentity();
 	cam.ativar();
-	
+
 	//desenha os itens do quarto
 	desenharQuarto();
 	desenharPortasEJanelas();
@@ -730,10 +736,10 @@ void desenha(GLFWwindow* window) {
 	desenharObjExtras();
 
 	if (luz == 1) {
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ADD);
+		glEnable(GL_LIGHT0);
 	}
 	else {
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glDisable(GL_LIGHT0);
 	}
 }
 

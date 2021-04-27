@@ -27,7 +27,7 @@ void rectTextura(vec3 p1, vec3 p2, vec3 p3, vec3 p4) {
 
 void loadMaterial(color cor) {
 	float matDiff[] = {cor[0],cor[1],cor[2],1.f};
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiff);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiff);
 }
 
 void desenharCuboTextura(unsigned int& id, float largura, float altura, float expessura, Textura* tex) {
@@ -50,33 +50,39 @@ void desenharCuboTextura(unsigned int& id, float largura, float altura, float ex
 
 
 	float matSpecular[] = { 1.f,1.f,1.f,1.f };
-	float matAmb[] = { 0.f,0.f,0.f,1.f };
-	glMaterialfv(GL_FRONT, GL_AMBIENT, matAmb);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpecular);
-	glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
+	float matAmb[] = { 1.f,1.f,1.f,1.f };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmb);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matSpecular);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 128.0);
 	
 	//frente
 	glNormal3f(0.f, 0.f, 1.f);
+	loadMaterial(branco);
 	rectTextura(v2,v3,v4,v1);
 
 	//direita
 	glNormal3f(1.f, 0.f, 0.f);
+	loadMaterial(branco);
 	rectTextura(v4, v3, v6, v5);
 
 	//back
 	glNormal3f(0.f, 0.f, -1.f);
+	loadMaterial(branco);
 	rectTextura(v5, v8, v7, v6);
 
 	//esquerda
 	glNormal3f(-1.f, 0.f, 0.f);
+	loadMaterial(branco);
 	rectTextura(v1, v8, v7, v2);
 
 	//topo
 	glNormal3f(0.f, 1.f, 0.f);
+	loadMaterial(branco);
 	rectTextura(v1, v4, v5, v8);
 
 	//bottom
 	glNormal3f(0.f, -1.f, 0.f);
+	loadMaterial(branco);
 	rectTextura(v2, v7, v6, v3);
 	
 	tex->UnBind();
@@ -98,10 +104,10 @@ void desenharCubo(unsigned int& id, float largura, float altura, float expessura
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	float matSpecular[] = { 1.f,1.f,1.f,1.f };
-	float matAmb[] = { 0.f,0.f,0.f,1.f };
-	glMaterialfv(GL_FRONT, GL_AMBIENT, matAmb);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpecular);
-	glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
+	float matAmb[] = { cor[0],cor[1],cor[2],1.f };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmb);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matSpecular);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 128.0);
 
 	//frente
 	glNormal3f(0.f, 0.f, 1.f);

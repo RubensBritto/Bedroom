@@ -36,20 +36,3 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 * **d:** andar para direita;
 * **p:** abrir/fechar a porta;
 * **j:** abrir/fechar a janela;
-* **l:** ligar/desligar a luz;
-
-## Objetos no Quarto
-
-* Cama *(Obrigatório)*
-* Mesa *(Obrigatório)*
-* Cadeira *(Obrigatório)*
-* Ventilador *(Obrigatório)*
-* Quadro *(Obrigatório)*
-* Armário;
-* Sofá;
-* Prateleira;
-* Cabiceira;
-* Livro;
-* Notebook;
-* Relógio;
-* Tapete.
