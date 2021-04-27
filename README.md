@@ -51,4 +51,5 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 * Cabiceira;
 * Livro;
 * Notebook;
+* Relógio;
 * Tapete.
