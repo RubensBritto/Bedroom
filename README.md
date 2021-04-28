@@ -59,4 +59,4 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 
 * JÚNIOR, Valério N. R. Minicurso de OpenGL. [S. l.], 25 out. 2020. Disponível em: https://github.com/valeriojr/monitoria-cg/blob/master/material/book.pdf. Acesso em: 28 abr. 2021.
 * OLIVEIRA, Marcelo Costa. Slides das Aulas do Professor Marcelo Costa Oliveira. Maceió: Instituto de Computação (Ufal), 2020. Color. 
-* OPENGL C++ - Gráficos 3D. Realização de Sergio Silva. [S.L]: Youtube, 2020. Son., color. Disponível em: https://www.youtube.com/playlist?list=PLVRDPs83ZhmcXYuktF3r2hfyoabg_EVPO. Acesso em: 28 abr. 2021.
+* SILVA, Sergio. OpenGL C++ - Gráficos 3D. [S.L]: Youtube, 2020. Son., color. Disponível em: https://www.youtube.com/playlist?list=PLVRDPs83ZhmcXYuktF3r2hfyoabg_EVPO. Acesso em: 28 abr. 2021.
