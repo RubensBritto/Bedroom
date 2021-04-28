@@ -251,7 +251,7 @@ void init(GLFWwindow* window) {
 
 	desenharCubo(cuboID[66], 2.0f, 0.089f, 2.0f, preto); //base luminaria
 	desenharCubo(cuboID[67], 0.1f, 2.0f, 0.1f, preto); //aste luuminaria
-	desenhaEsfera(esferaID[0], vermelho, 1.5, 10, 10); //luminaria
+	desenhaEsfera(esferaID[0], branco, 1.5, 10, 10); //luminaria
 }
 
 void desenharQuarto() {
@@ -561,9 +561,8 @@ void desenharObjObrigatorios() {
 	if (angulo_vent >= 360) {
 		angulo_vent = 0.0;
 	}
-}
 
-void desenharObjExtras() {
+	// lampada luminaria
 	glPushMatrix();
 	glTranslatef(70.0f, 0.4f, -95.0f);
 	glCallList(esferaID[0]);
@@ -585,6 +584,9 @@ void desenharObjExtras() {
 	glTranslatef(70.0f, -3.0f, -95.0f);
 	glCallList(cuboID[67]);
 	glPopMatrix();
+}
+
+void desenharObjExtras() {
 
 	// puf
 	glPushMatrix();

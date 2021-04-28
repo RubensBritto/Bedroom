@@ -180,6 +180,13 @@ void desenhaEsfera(unsigned int& id, color cor, GLfloat raio, GLuint nStack, GLu
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
+
+	float matSpecular[] = { 1.f,1.f,1.f,1.f };
+	float matAmb[] = { cor[0],cor[1],cor[2],1.f };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmb);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matSpecular);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 128.0);
+
 	for (GLuint i = 0; i < nStack; i++)
 	{
 		glColor3fv(cor);
@@ -188,15 +195,20 @@ void desenhaEsfera(unsigned int& id, color cor, GLfloat raio, GLuint nStack, GLu
 		for (GLuint j = 0; j < nSectors; j++) {
 			GLuint index = indices[i][j];
 			glVertex3fv(&pontos[index].x);
+			glNormal3fv(&pontos[index].x);
 			index = indices[i + 1][j];
 			glVertex3fv(&pontos[index].x);
+			glNormal3fv(&pontos[index].x);
 
 			if (j == nSectors - 1) {
 				GLuint index = indices[i][0];
 				glVertex3fv(&pontos[index].x);
+				glNormal3fv(&pontos[index].x);
 				index = indices[i + 1][0];
 				glVertex3fv(&pontos[index].x);
+				glNormal3fv(&pontos[index].x);
 			}
+			loadMaterial(cor);
 		}
 		glEnd();
 	}
