@@ -22,7 +22,7 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 ### Porta e Janelas Fechadas
 ![Bedroom/Prints/Print_4.png](https://github.com/RubensBritto/Bedroom/blob/main/Prints/Print_4.png)
 
-### Porta e Janelas Fechadas
+### Porta e Janelas Abertas
 ![Bedroom/Prints/Print_5.png](https://github.com/RubensBritto/Bedroom/blob/main/Prints/Print_5.png)
 
 ## Requisitos
@@ -54,3 +54,9 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 * **j:** abrir/fechar a janela;
 * **l:** luz/desligar a luz 0 (luz da luminária);
 * **k:** ligar/desligar a luz 1 (luz do quarto);
+
+## Referências
+
+* JÚNIOR, Valério N. R. Minicurso de OpenGL. [S. l.], 25 out. 2020. Disponível em: https://github.com/valeriojr/monitoria-cg/blob/master/material/book.pdf. Acesso em: 28 abr. 2021.
+* OLIVEIRA, Marcelo Costa. Slides das Aulas do Professor Marcelo Costa Oliveira. Maceió: Instituto de Computação (Ufal), 2020. Color. 
+* OPENGL C++ - Gráficos 3D. Realização de Sergio Silva. [S.L]: Youtube, 2020. Son., color. Disponível em: https://www.youtube.com/playlist?list=PLVRDPs83ZhmcXYuktF3r2hfyoabg_EVPO. Acesso em: 28 abr. 2021.
