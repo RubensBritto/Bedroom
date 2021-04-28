@@ -148,13 +148,14 @@ void desenhaEsfera(unsigned int& id, color cor, GLfloat raio, GLuint nStack, GLu
 	std::vector<std::vector<GLuint>> indices;
 
 	std::vector<vec3> pontos;
-	const GLfloat PI = 3.141592;
+	const GLfloat PI = 3.141592f;
 
 	GLfloat deltaPhi = PI / nStack;
 	GLfloat deltaTheta = 2 * PI / nSectors;
 
 	for (GLuint i = 0; i <= nStack; i++) {
-		GLfloat phi = -PI / 2.0 + i * deltaPhi;
+		
+		GLfloat phi = -PI / 2.0f + i * deltaPhi;
 		GLfloat temp = raio * cos(phi);
 		GLfloat y = raio * sin(phi);
 
@@ -175,29 +176,15 @@ void desenhaEsfera(unsigned int& id, color cor, GLfloat raio, GLuint nStack, GLu
 		indices.push_back(pt);
 
 	}//next i
-
-	// -- plotar pontos
-	/*
-	glColor3fv(vermelho);
-	glPointSize(2.5);
-	glBegin(GL_POINTS);
-	for(GLuint i = 0; i < pontos.size(); i++){
-		glVertex3fv(&pontos[i].x);
-	}
-	glEnd();
-	*/
-
-
 	glNewList(id, GL_COMPILE);
-	glColor3fv(cor);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
 	for (GLuint i = 0; i < nStack; i++)
 	{
+		glColor3fv(cor);
 		glBegin(GL_TRIANGLE_STRIP);
-
+		
 		for (GLuint j = 0; j < nSectors; j++) {
 			GLuint index = indices[i][j];
 			glVertex3fv(&pontos[index].x);
@@ -213,29 +200,9 @@ void desenhaEsfera(unsigned int& id, color cor, GLfloat raio, GLuint nStack, GLu
 		}
 		glEnd();
 	}
+	
 	glDisable(GL_CULL_FACE);
 	glEndList();
 
 }
 
-void desenharTerreno(unsigned int id) {
-	float L = 500.0;
-	float incr = 1.0;
-	float y = -0.5;
-	glNewList(id, GL_COMPILE);
-	glColor3fv(branco_gelo);
-	glBegin(GL_LINES);
-	for (float i = -L; i <= L; i += incr) {
-
-		//verticais
-		glVertex3f(i, y, -L);
-		glVertex3f(i, y, L);
-
-		//horizontais
-		glVertex3f(-L, y, i);
-		glVertex3f(L, y, i);
-	}
-
-	glEnd();
-	glEndList();
-}

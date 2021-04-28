@@ -2,14 +2,14 @@
 #pragma once
 typedef float color[3];
 
-color vermelho = { 0.85, 0.12, 0.0 };
-color verde = { 0.0, 1.0, 0.0 };
-color azul = { 0.0, 0.15,0.35 };
-color preto = { 0.0, 0.0, 0.0 };
-color branco = { 1.0, 1.0, 1.0 };
-color branco_gelo = { 0.88, 0.91, 0.89 };
-color amarelo = { 1.0, 1.0, 0.0 };
-color violeta = { 0.54, 0.17, 0.88 };
-color cinza = { 0.8, 0.8, 0.8 };
-color cinza_escuro = { 0.67, 0.67, 0.67 };
-color laranja = { 1.0, 0.6, 0.2 };
+color vermelho = { 0.85f, 0.12f, 0.0f };
+color verde = { 0.0f, 1.0f, 0.0f };
+color azul = { 0.0f, 0.15f , 0.35f };
+color preto = { 0.0f, 0.0f, 0.0f };
+color branco = { 1.0f, 1.0f, 1.0f };
+color branco_gelo = { 0.88f, 0.91f, 0.89f };
+color amarelo = { 1.0f, 1.0f, 0.0f };
+color violeta = { 0.54f, 0.17f, 0.88f };
+color cinza = { 0.8f, 0.8f, 0.8f };
+color cinza_escuro = { 0.67f, 0.67f, 0.67f };
+color laranja = { 1.0f, 0.6f, 0.2f };

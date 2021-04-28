@@ -12,7 +12,7 @@ private:
 	vec3 m_velocidade;
 	float m_sc1 = 1; //escala (velocidade que caminha no cenário)
 	float m_yaw;
-	float m_PI = 3.14159;
+	float m_PI = 3.14159f;
 public:
 	camera(vec3 pos);
 	~camera();
