@@ -9,6 +9,22 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 * **Linguagem:** C++;
 * **Bibliotecas:** GLFW 2017;
 
+## Imagens
+### Quarto com a Luz 1 Ligada e Luz 0 Desligada
+![Bedroom/Prints/Print_1.png](https://github.com/RubensBritto/Bedroom/blob/main/Prints/Print_1.png)
+
+### Quarto com a Luz 1 Deligada e Luz 0 Desligada
+![Bedroom/Prints/Print_2.png](https://github.com/RubensBritto/Bedroom/blob/main/Prints/Print_2.png)
+
+### Quarto com a Luz 1 Deligada e Luz 1 Ligada
+![Bedroom/Prints/Print_3.png](https://github.com/RubensBritto/Bedroom/blob/main/Prints/Print_3.png)
+
+### Porta e Janelas Fechadas
+![Bedroom/Prints/Print_4.png](https://github.com/RubensBritto/Bedroom/blob/main/Prints/Print_4.png)
+
+### Porta e Janelas Fechadas
+![Bedroom/Prints/Print_5.png](https://github.com/RubensBritto/Bedroom/blob/main/Prints/Print_5.png)
+
 ## Requisitos
 
 ### AB1
@@ -36,3 +52,5 @@ Projeto para disciplina de Computação Gráfica ministrada pelo professor Marce
 * **d:** andar para direita;
 * **p:** abrir/fechar a porta;
 * **j:** abrir/fechar a janela;
+* **l:** luz/desligar a luz 0 (luz da luminária);
+* **k:** ligar/desligar a luz 1 (luz do quarto);
